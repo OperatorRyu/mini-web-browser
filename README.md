@@ -1,1 +1,1 @@
-# mini-web-browser
+# Intended for use in Linux
