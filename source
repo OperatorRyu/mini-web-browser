@@ -1,0 +1,52 @@
+import tkinter as tk
+from tkinter import ttk
+import webview
+
+class MiniWebBrowser:
+    def __init__(self, root, width, height, url):
+        self.root = root
+        self.width = width
+        self.height = height
+        self.url = url
+
+
+        self.root.title("Mini Web Browser")
+        self.root.geometry(f"{width}x{height}")
+        self.root.overrideredirect(True)
+        self.root.protocol("WM_DELETE_WINDOW", self.on_close)
+
+
+        frame = ttk.Frame(self.root)
+        frame.place(relwidth=1, relheight=1)
+
+
+        webview.create_window(
+            "Mini Web Browser",
+            url=self.url,
+            width=self.width,
+            height=self.height,
+            resizable=True, 
+            text_select=True,
+            on_top=True, 
+            frameless=True,
+            confirm_close=True, 
+            background_color='#FFFFFF'
+        )
+
+    def on_close(self):
+        webview.destroy_window("Mini Web Browser")
+        self.root.destroy()
+
+def main():
+    window_width = 1100
+    window_height = 650
+    website_url = "https://operatorryu.github.io/startpage/"
+
+    root = tk.Tk()
+
+    browser = MiniWebBrowser(root, window_width, window_height, website_url)
+
+    webview.start()
+
+if __name__ == "__main__":
+    main()
